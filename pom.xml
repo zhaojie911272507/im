@@ -20,4 +20,39 @@
           但此时api不能直接调用mapper中的方法
           -->
     <packaging>pom</packaging>
+    <!--1.引入依赖parent-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId><!--引入后，相当于就是使用spring boot的父依赖-->
+        <version>2.1.5.RELEASE</version>
+      <relativePath/>
+    </parent>
+    <!--设置资源属性-->
+    <properties>
+         <project>UTF-8</project>
+         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+         <java.version>1.8</java.version>
+    </properties>
+    <!--3.引入依赖，要使用的依赖要注明-->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions><!--要排除某一个相应的jar包，因为后期要整合使用其他的日志，所以这里不使用-->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId><!--spring容器里面包含的web模块-->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId><!--默认的配置是解析yml文件，其他类型像xml等类型的包时就要引入该依赖-->
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>
